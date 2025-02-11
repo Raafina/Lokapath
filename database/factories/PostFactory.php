@@ -25,7 +25,7 @@ class PostFactory extends Factory
             'author_id' => Author::factory(),
             'category_id' => Category::factory(),
             'slug' => Str::slug($title),
-            'body' => fake()->text(),
+            'body' => implode("\n\n", fake()->paragraphs(rand(5, 7))),
         ];
     }
 }
