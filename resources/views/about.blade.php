@@ -1,4 +1,5 @@
 <x-layout>
     <x-slot:title>{{ $title }}</x-slot:title>
-    <h1>About</h1>
+
+    <img src="LokapathLogo.svg" alt="">
 </x-layout>

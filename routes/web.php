@@ -35,3 +35,15 @@ Route::get('/post/{post:slug}', function (Post $post) {
 Route::get('/contact', function () {
     return view('contact', ['title' => 'Contact']);
 });
+
+Route::get('/login', function () {
+    return view('login', ['title' => 'Login']);
+});
+
+Route::get('/register', function () {
+    return view('register', ['title' => 'Register']);
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard', ['title' => 'Dashboard']);
+});
