@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\RegisterController;
 use App\Models\Post;
 use App\Models\Author;
 use App\Models\Category;
@@ -36,14 +38,15 @@ Route::get('/contact', function () {
     return view('contact', ['title' => 'Contact']);
 });
 
-Route::get('/login', function () {
-    return view('login', ['title' => 'Login']);
-});
+Route::get('/login', [AuthController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [AuthController::class, 'authenticate']);
+Route::post('/logout', [AuthController::class, 'logout']);
 
-Route::get('/register', function () {
-    return view('register', ['title' => 'Register']);
-});
+Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
+Route::post('/register', [RegisterController::class, 'store']);
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard', ['title' => 'Dashboard']);
-});
+})->middleware('auth');

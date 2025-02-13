@@ -3,9 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\Post;
+use App\Models\User;
 use App\Models\Author;
-use App\Models\Category;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -31,6 +32,13 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now(),
             'password' =>  Hash::make('password'),
             'remember_token' => Str::random(10),
+        ]);
+
+        User::create([
+            'name' => 'Tes1',
+            'username' => 'tes1',
+            'email' => 'tes1',
+            'password' => Hash::make('password')
         ]);
 
         $this->call([CategorySeeder::class]);
