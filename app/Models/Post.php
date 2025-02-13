@@ -6,18 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Post extends Model
 {
-    use HasFactory;
+    use  Sluggable, HasFactory;
     // protected $table = 'blog_post'  *if table name is not 'posts' or not same as class name
     // protected $primaryKey = 'post_id' *if primary key is not 'id'
-    protected $fillable = ['title', 'author', 'slug', 'body'];
-    protected $with = ['author', 'category'];
+    protected $guarded = ['id'];
+    protected $with = ['user', 'category'];
 
-    public function author(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(Author::class);
+        return $this->belongsTo(User::class);
     }
 
     public function category(): BelongsTo
@@ -51,5 +52,13 @@ class Post extends Model
                 fn($query) => $query->where('username', $author)
             )
         );
+    }
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
     }
 }

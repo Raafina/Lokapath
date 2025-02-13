@@ -12,7 +12,7 @@ class AuthController extends Controller
      */
     public function index()
     {
-        return view('login', [
+        return view('auth.login', [
             'title' => 'Login',
         ]);
     }
@@ -29,7 +29,7 @@ class AuthController extends Controller
         ]);
 
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::guard('web')->attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended('/dashboard');
         }

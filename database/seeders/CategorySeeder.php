@@ -35,8 +35,8 @@ class CategorySeeder extends Seeder
                 'color' => 'green'
             ],
             [
-                'name' => 'Hiker Story',
-                'slug' => 'hiker-story',
+                'name' => 'Story',
+                'slug' => 'story',
                 'color' => 'yellow'
             ],
         ];

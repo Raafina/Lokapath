@@ -1,3 +1,76 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+trix-editor,
+article {
+    @apply text-black;
+}
+trix-editor ul,
+article ul,
+trix-editor ol,
+article ol {
+    @apply ml-6; /* Indentation for lists */
+}
+
+trix-editor ul,
+article ul {
+    @apply list-disc;
+}
+
+trix-editor ol,
+article ol {
+    @apply list-decimal;
+}
+
+trix-editor li,
+article li {
+    @apply mb-2;
+}
+
+trix-editor a,
+article a {
+    @apply text-blue-500 underline hover:text-blue-800;
+}
+
+trix-editor h1,
+article h1 {
+    @apply text-xl;
+}
+
+trix-editor strong,
+article strong {
+    @apply font-bold;
+}
+
+trix-editor em,
+article em {
+    @apply italic;
+}
+
+trix-editor blockquote,
+article blockquote {
+    font-style: italic;
+    color: #555;
+    border-left: 4px solid #ccc;
+    margin: 1em 0;
+    padding: 0.5em 1em;
+    background-color: #f9f9f9;
+}
+
+.dark trix-editor blockquote,
+.dark article blockquote {
+    color: #f9f9f9;
+    border-left: 4px solid #535050;
+    background-color: #374952;
+}
+
+/* Hide file attachment button in toolbar */
+trix-toolbar .trix-button--icon-attach,
+trix-toolbar .trix-button-group--file-tools {
+    display: none !important;
+}
+
+trix-toolbar .trix-button-group {
+    background-color: #fff;
+}

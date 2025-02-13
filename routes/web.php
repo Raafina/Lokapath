@@ -1,52 +1,35 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegisterController;
-use App\Models\Post;
-use App\Models\Author;
-use App\Models\Category;
-use Illuminate\Support\Facades\Route;
-use PHPUnit\Framework\Constraint\Count;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DashboardPostsController;
+use App\Http\Controllers\LandingController;
 
-Route::get('/', function () {
-    return view('home', ['title' => 'Home Page']);
-});
+// Landing
+Route::get('/', [LandingController::class, 'posts']);
+Route::get('/about', [LandingController::class, 'about']);
+Route::get('/contact', [LandingController::class, 'contact']);
+Route::get('/posts', [LandingController::class, 'posts']);
+Route::get('/post/{post:slug}', [LandingController::class, 'postsBySlug']);
+Route::get('/user?={user:username}', [LandingController::class, 'postByUser']);
+Route::get('/categories?={category:slug}', [LandingController::class, 'postByCategory']);
 
-Route::get('/about', function () {
-    return view('about', ['title' => 'About']);
-});
-
-Route::get('/posts', function () {
-    $posts = Post::latest()->get();
-    return view('posts', ['title' => 'Blog', 'posts' => Post::filter(request(['search', 'category', 'author']))->latest()->paginate(6)->withQueryString()]);
-});
-
-Route::get('/authors/{author:username}', function (Author $author) {
-    return view('posts', ['title' => Count($author->posts) . ' Post by ' . $author->name, 'posts' => $author->posts]);
-});                                                                                    // put on public function at models
-
-Route::get('/categories/{category:slug}', function (Category $category) {
-    return view('posts', ['title' =>   'Article in ' . $category->name, 'posts' => $category->posts]);
-});
-
-Route::get('/post/{post:slug}', function (Post $post) {
-    return view('post', ['title' => 'Detail Blog', 'post' => $post]);
-});
-
-
-Route::get('/contact', function () {
-    return view('contact', ['title' => 'Contact']);
-});
-
+// Auth
 Route::get('/login', [AuthController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [AuthController::class, 'authenticate']);
 Route::post('/logout', [AuthController::class, 'logout']);
-
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 
-
-
-Route::get('/dashboard', function () {
-    return view('dashboard', ['title' => 'Dashboard']);
-})->middleware('auth');
+// CMS
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
+Route::get('/dashboard/posts', [DashboardPostsController::class, 'index'])->middleware('auth');
+Route::get('/dashboard/post/create', [DashboardPostsController::class, 'createPost'])->middleware('auth');
+Route::get('/dashboard/post/createSlug', [DashboardPostsController::class, 'createSlug'])->middleware('auth');
+Route::get('/dashboard/post/{post:slug}', [DashboardPostsController::class, 'show'])->middleware('auth');
+Route::get('/dashboard/post/{post:slug}/edit', [DashboardPostsController::class, 'edit'])->middleware('auth');
+Route::post('/dashboard/post/create', [DashboardPostsController::class, 'store'])->middleware('auth');
+Route::delete('/dashboard/post/{post:slug}', [DashboardPostsController::class, 'destroy'])->middleware('auth');
+Route::put('/dashboard/post/{post:slug}', [DashboardPostsController::class, 'update'])->middleware('auth');

@@ -32,6 +32,7 @@
                             </div>
                         </div>
                     @endif
+
                     {{-- if login failed, toast error --}}
                     @if (session('loginError'))
                         <div id="toast-interactive"
@@ -67,6 +68,11 @@
                                  dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
                                  placeholder:text-gray-400  {{ $errors->has('username') ? 'bg-red-100 border-red-500' : 'bg-gray-50 border-gray-300' }}"
                                 placeholder="user_name" required="">
+                            @error('email')
+                                <p class="text-sm text-red-600 mt-1">
+                                    {{ $message }}
+                                </p>
+                            @enderror
                         </div>
                         <div>
                             <label for="password"
@@ -78,6 +84,11 @@
                                 placeholder:text-gray-400
                                  {{ $errors->has('password') ? 'bg-red-100 border-red-500' : 'bg-gray-50 border-gray-300' }}"
                                 required="">
+                            @error('password')
+                                <p class="text-sm text-red-600 mt-1">
+                                    {{ $message }}
+                                </p>
+                            @enderror
                         </div>
                         {{-- <div class="flex items-center justify-between">
                             <div class="flex items-start">

@@ -18,33 +18,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
 
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $this->call([UserSeeder::class, CategorySeeder::class]);
 
-        $author_custom1 = Author::create([
-            'name' => 'Raafi',
-            'username' => 'raafi',
-            'email' => 'raafi16@gmail.com',
-            'email_verified_at' => now(),
-            'password' =>  Hash::make('password'),
-            'remember_token' => Str::random(10),
-        ]);
-
-        User::create([
-            'name' => 'Tes1',
-            'username' => 'tes1',
-            'email' => 'tes1',
-            'password' => Hash::make('password')
-        ]);
-
-        $this->call([CategorySeeder::class]);
         Post::factory(50)->recycle(
-            Category::all(),
-            Author::factory(5)->create(),
+            [
+                Category::all(),
+                User::all()
+            ]
+
         )->create();
     }
 }

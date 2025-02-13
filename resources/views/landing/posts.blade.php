@@ -7,8 +7,8 @@
             @if (request('category'))
                 <input type="hidden" name="category" value="{{ request('category') }}">
             @endif
-            @if (request('author'))
-                <input type="hidden" name="author" value="{{ request('author') }}">
+            @if (request('user'))
+                <input type="hidden" name="user" value="{{ request('user') }}">
             @endif
             <div class="items-center mx-auto mb-3 space-y-4 max-w-screen-sm sm:flex sm:space-y-0">
                 <div class="relative w-full">
@@ -24,7 +24,7 @@
 
                     </div>
                     <input
-                        class="block p-3 pl-10 w-full text-sm text-gray-400 bg-gray-50 rounded-lg border border-gray-300 sm:rounded-none sm:rounded-l-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        class="block p-3 pl-10 w-full text-sm text-black placeholder:text-gray-400 bg-gray-50 rounded-lg border border-gray-300 sm:rounded-none sm:rounded-l-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                         placeholder="Search for Article" type="search" id="search" name='search'
                         autocomplete="off">
                 </div>
@@ -37,7 +37,7 @@
 
         {{ $posts->links() }}
 
-        <div class="mb-8 mt-8 grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div class="mb-8 mt-3 md:mt-8 grid gap-4 md:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {{-- Content --}}
             @forelse ($posts as $post)
                 <article
@@ -54,17 +54,18 @@
                         <span class="text-sm">{{ $post->created_at->diffForHumans() }}</span>
                     </div>
                     <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white hover:underline"><a
-                            href="/post/{{ $post->slug }}">{{ Str::limit($post->title) }}</a></h2>
-                    <p class="mb-5 font-light text-gray-500 dark:text-gray-400">{{ Str::limit($post->body) }}.</p>
+                            href="/post/{{ $post->slug }}"
+                            class="text-black no-underline hover:text-black">{{ Str::limit($post->title) }}</a></h2>
+                    <p class="mb-5 font-light text-gray-500 dark:text-gray-400">{!! Str::limit($post->body) !!}.</p>
                     <div class="flex justify-between items-center">
                         <div class="flex items-center space-x-4">
                             {{-- <img class="w-7 h-7 rounded-full"
                                 src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
                                 alt="Jese Leos avatar" /> --}}
 
-                            <a href="/posts?author={{ $post->author->username }}"
-                                class="font-medium dark:text-white hover:underline hover:cursor-pointer">
-                                {{ $post->author->name }}
+                            <a href="/posts?user={{ $post->user->username }}"
+                                class="mt-4 font-medium dark:text-white hover:underline hover:cursor-pointer hover:text-black text-black no-underline">
+                                {{ $post->user->name }}
                             </a>
                         </div>
                         <a href="/post/{{ $post->slug }}"
@@ -80,8 +81,6 @@
                     </div>
                 </article>
             @empty
-                <div class="flex flex-col justify-center ">
-                </div>
                 <div class="flex flex-col justify-center">
                     <p class="text-center text-2xl font-bold tracking-tight text-gray-900 dark:text-white">No post found
                     </p>
