@@ -6,7 +6,8 @@
     </div>
 
     <div class="bg-white rounded-md px-6 py-4 shadow-md">
-        <form method="POST" action="/dashboard/post/{{ $post->slug }}">
+
+        <form method="POST" action="/dashboard/post/{{ $post->slug }}" enctype="multipart/form-data">
             @method('put')
             @csrf
             <div class="mb-5">
@@ -24,8 +25,7 @@
                 @enderror
             </div>
             <div class="mb-5">
-                <label for="slug" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                    Slug</label>
+
                 <input type="slug" id="slug" name="slug"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
                     focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700
@@ -60,6 +60,33 @@
                     </p>
                 @enderror
             </div>
+            <div class="mb-5 ">
+                <div class="w-64">
+                    @if ($post->image)
+                        <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Current Image</p>
+                        <img src="{{ asset('storage/' . $post->image) }}" id="img-preview">
+                    @else
+                        <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Preview
+                        </p>
+                        <img id="img-preview" class="w-1/2 h-auto mx-auto">
+                    @endif
+                </div>
+                <label class="block mb-2 mt-2 text-sm font-medium text-gray-900 dark:text-white"
+                    for="small_size">Image</label>
+                <input type="hidden" name="oldImage" value="{{ $post->image }}">
+                <input
+                    class="block w-full pt-2 text-sm text-gray-900 border  rounded-lg 
+                    cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700
+                     dark:border-gray-600 dark:placeholder-gray-400 
+                     {{ $errors->has('image') ? 'bg-red-100 border-red-500' : 'bg-gray-50 border-gray-300' }}"
+                    id="img-input" type="file" name="image" onchange="previewImage()">
+                @error('image')
+                    <p class="text-sm text-red-600 mt-1">
+                        {{ $message }}
+                    </p>
+                @enderror
+            </div>
             <div class="mb-5">
                 <label for="body" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Body</label>
                 <input id="body" type="hidden" name="body" value="{{ old('body', $post->body) }}">
@@ -70,31 +97,11 @@
                     </p>
                 @enderror
             </div>
+
             <button type="submit"
                 class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Publish</button>
         </form>
     </div>
 
-    <script>
-        const title = document.querySelector('#title');
-        const slug = document.querySelector('#slug');
-        title.addEventListener('change', function() {
-            fetch('/dashboard/post/createSlug?title=' + title.value)
-                .then(response => response.json())
-                .then(data => slug.value = data.slug)
-        })
-    </script>
-
-    @if (session('success'))
-        <script>
-            Swal.fire({
-                title: 'Success!',
-                text: '{{ session('success') }}',
-                icon: 'success',
-                confirmButtonText: 'OK'
-            })
-        </script>
-    @endif
-
-
+    <script src="{{ asset('js/utilsPost.js') }}"></script>
 </x-layout-dashboard>

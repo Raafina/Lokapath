@@ -2,8 +2,9 @@
     <x-slot:title>{{ $title }}</x-slot:title>
 
     <div class="bg-white rounded-lg shadow-md py-6">
+
         <h2 class="text-2xl font-bold text-center">Contact Us</h2>
-        <form class="space-y-4 max-w-xl px-4  mx-auto" action="/login" method="POST">
+        <form id="contactForm" class="space-y-4 max-w-xl px-4  mx-auto" action="/login" method="POST">
             @csrf
             <div>
                 <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -33,6 +34,8 @@
                 Message</button>
 
         </form>
-    </div>
 
+        <div id="formMessage" class="text-center mt-4 text-base font-semibold dark:text-white text-dark"></div>
+    </div>
+    <script src="{{ asset('js/contactForm.js') }}"></script>
 </x-layout>

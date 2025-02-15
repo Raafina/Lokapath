@@ -26,7 +26,7 @@ Route::post('/register', [RegisterController::class, 'store']);
 // CMS
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 Route::get('/dashboard/posts', [DashboardPostsController::class, 'index'])->middleware('auth');
-Route::get('/dashboard/post/create', [DashboardPostsController::class, 'createPost'])->middleware('auth');
+Route::get('/dashboard/post/create', [DashboardPostsController::class, 'createPostView'])->middleware('auth');
 Route::get('/dashboard/post/createSlug', [DashboardPostsController::class, 'createSlug'])->middleware('auth');
 Route::get('/dashboard/post/{post:slug}', [DashboardPostsController::class, 'show'])->middleware('auth');
 Route::get('/dashboard/post/{post:slug}/edit', [DashboardPostsController::class, 'edit'])->middleware('auth');

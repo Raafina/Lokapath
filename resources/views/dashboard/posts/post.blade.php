@@ -53,6 +53,11 @@
                         </span>
                     </a>
                 </header>
+                <div>
+                    @if ($post->image)
+                        <img src="{{ asset('storage/' . $post->image) }}">
+                    @endif
+                </div>
                 {!! $post->body !!}
                 <address class="flex items-center not-italic  mt-10">
                     <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">

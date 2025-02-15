@@ -12,9 +12,7 @@
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
     <link rel="icon" type="svg" href="{{ asset('LokapathLogo.svg') }}">
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-    <style>
-        /* trix-toolbar [data-trix-butto] */
-    </style>
+
     <title>Lokapath | CMS</title>
 </head>
 

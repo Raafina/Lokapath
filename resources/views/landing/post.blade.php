@@ -22,6 +22,9 @@ URL: https://flowbite.com/docs/components/typography/
                         </span>
                     </a>
                 </header>
+                <div class="mx-auto mb-3">
+                    <img src="{{ asset('storage/' . $post->image) }}">
+                </div>
                 {!! $post->body !!}
 
                 <address class="flex items-center not-italic  mt-10">

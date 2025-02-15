@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class DashboardPostsController extends Controller
@@ -29,12 +30,19 @@ class DashboardPostsController extends Controller
      */
     public function store(Request $request)
     {
+
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'slug' => 'required|unique:posts',
             'category_id' => 'required|exists:categories,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:10240',
             'body' => 'required'
         ]);
+
+        if ($request->file('image')) {
+            $validatedData['image'] = $request->file('image')->store('post-images');
+        }
+
         $validatedData['user_id'] = auth()->user()->id;
 
         Post::create($validatedData);
@@ -53,7 +61,7 @@ class DashboardPostsController extends Controller
         ]);
     }
 
-    public function createPost()
+    public function createPostView()
     {
         return view('dashboard.posts.post-create', ['title' => 'Create Post', 'categories' => Category::all()]);
     }
@@ -82,6 +90,7 @@ class DashboardPostsController extends Controller
         $rules = [
             'title' => 'required|max:255',
             'category_id' => 'required|exists:categories,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:10240',
             'body' => 'required'
         ];
 
@@ -90,7 +99,16 @@ class DashboardPostsController extends Controller
         }
 
         $validatedData = $request->validate($rules);
+
+        if ($request->file('image')) {
+            if ($request->oldImage) {
+                Storage::delete($request->oldImage);
+            }
+            $validatedData['image'] = $request->file('image')->store('post-images');
+        }
+
         $validatedData['user_id'] = auth()->user()->id;
+
         Post::where('id', $post->id)->update($validatedData);
 
         return redirect('/dashboard/posts')->with('success', 'Post have been edited');
@@ -101,6 +119,10 @@ class DashboardPostsController extends Controller
      */
     public function destroy(Post $post)
     {
+        if ($post->image) {
+            Storage::delete($post->image);
+        }
+
         Post::destroy($post->id);
         return redirect('/dashboard/posts')->with('success', 'Post has been deleted');
     }
