@@ -2,7 +2,6 @@
     <x-slot:title>{{ $title }}</x-slot:title>
     <div class="mb-8 mx-auto max-w-screen-xl ">
         {{-- Search Bar --}}
-
         <form action="/posts" method="GET" class="lg:py-4 ">
             @if (request('category'))
                 <input type="hidden" name="category" value="{{ request('category') }}">

@@ -1,3 +1,5 @@
+const formspreeUrl = import.meta.env.VITE_FORMSPREE_URL;
+
 // send email
 document
     .getElementById("contactForm")
@@ -8,7 +10,7 @@ document
         const formData = new FormData(form);
 
         try {
-            const response = await fetch("https://formspree.io/f/xzzdgbvn", {
+            const response = await fetch("formspreeUrl", {
                 method: "POST",
                 body: formData,
                 headers: {

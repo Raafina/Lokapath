@@ -37,5 +37,5 @@
 
         <div id="formMessage" class="text-center mt-4 text-base font-semibold dark:text-white text-dark"></div>
     </div>
-    <script src="{{ asset('js/contactForm.js') }}"></script>
+    <script src="{{ asset('js/sendEmail.js') }}"></script>
 </x-layout>
