@@ -1,4 +1,4 @@
-![CMS Lokapath Dashboard]([https://raw.githubusercontent.com/Raafina/CMS-Lokapath/main/screenshots/dashboard.png](https://github.com/Raafina/CMS-Lokapath/blob/main/public/LokapathLogo.svg))
+![CMS Lokapath Dashboard](https://github.com/Raafina/CMS-Lokapath/blob/main/public/LokapathLogo.svg)
 ## Content Management System (CMS) Lokapath
 CMS Lokapath is a content management system (CMS) designed to manage articles related to hiking, such as news, information, hiker stories, reviews, and tips & tricks.
 
