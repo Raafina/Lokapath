@@ -16,7 +16,7 @@ CMS Lokapath is a content management system (CMS) designed to manage articles re
 </ol>
 
 <ol>
-    <li><p>Clone this repository</p><p>`git clone https://github.com/Raafina/CMS-Lokapath.git`</p></li>
+    <li><p>Clone this repository</p><p>```git clone https://github.com/Raafina/CMS-Lokapath.git```</p></li>
     <li>Navigate to the project directory</li>
     <li>Install dependencies</li>
     <li>Configure the .env file/SQLite</li>
