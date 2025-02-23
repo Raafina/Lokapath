@@ -2,8 +2,10 @@
 CMS Lokapath is a content management system (CMS) designed to manage articles related to hiking, such as news, information, hiker stories, reviews, and tips & tricks.
 
 ## Key Feature
-✅ Article Management (CRUD Posts)
-✅ User Authentication for Authors
+<ul>
+    <li>Article Management (CRUD Posts)</li>
+    <li>User Authentication for Authors</li>
+</ul>
 
 ## Tech Stack
 <ol>
@@ -15,7 +17,7 @@ CMS Lokapath is a content management system (CMS) designed to manage articles re
 
 ## How To Use
 <ol>
-    <li>Clone this repository</li>
+    <li><p>Clone this repository</p><p>git clone https://github.com/Raafina/CMS-Lokapath.git</p></li>
     <li>Navigate to the project directory</li>
     <li>Install dependencies</li>
     <li>Configure the .env file/SQLite</li>
