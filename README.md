@@ -48,6 +48,7 @@ CMS Lokapath is a content management system (CMS) designed to manage articles re
     </li>
     <li>
         <p>Start the application</p>
+        <p><pre>npm run dev</pre></p>
         <p><pre>php artisan serve</pre></p>
     </li>
 </ol>
