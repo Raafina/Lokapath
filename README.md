@@ -23,15 +23,16 @@ CMS Lokapath is a content management system (CMS) designed to manage articles re
 <ol>
     <li>
         <p>Clone this repository</p>
-        <p>git clone https://github.com/Raafina/CMS-Lokapath.git</p></li>
+        <p><pre>git clone https://github.com/Raafina/CMS-Lokapath.git</pre></p>
+    </li>
     <li>
         <p>Navigate to the project directory</p>
-        <p>cd CMS-Lokapath</p>
+        <p><pre>cd CMS-Lokapath</pre></p>
     </li>
     <li>
         <p>Install dependencies</p>
-        <p>composer install</p>
-        <p>npm install</p>
+        <p><pre>composer install</pre></p>
+        <p><pre>npm install</pre></p>
     </li>
     <li>
         <p>Configure the .env file/SQLite</p>
@@ -39,15 +40,15 @@ CMS Lokapath is a content management system (CMS) designed to manage articles re
             <li>Duplicate .env.example and rename it to .env</li>
             <li>Adjust the database and environment configurations</li>
         </ul>
-        <p>php artisan key:generate</p>
+        <p><pre>php artisan key:generate</pre></p>
     </li>
     <li>
         <p>Run database migrations</p>
-        <p>php artisan migrate --seed</p>
+        <p><pre>php artisan migrate --seed</pre></p>
     </li>
     <li>
         <p>Start the application</p>
-        <p>php artisan serve</p>
+        <p><pre>php artisan serve</pre></p>
     </li>
 </ol>
 
